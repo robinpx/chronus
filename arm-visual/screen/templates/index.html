@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<head>
+    <title>prophetic arm</title>
+    <link rel="stylesheet" href="../static/index.css">
+</head>
+
+<body>
+    <canvas width="250" height="750" id="frame">
+    </canvas>
+
+    <script>
+        let canvas = document.getElementById("frame");
+        let ctx = canvas.getContext("2d");
+
+        fetch('./image', {
+            method: 'GET'
+        })
+            .then(response => response.json())
+            .then(data => {
+                let captcha_image = new Image();
+                captcha_image.src = data['image']
+                console.log(data['image']);
+                captcha_image.onload = () => {
+                    ctx.drawImage(captcha_image, 0, 0);
+                }
+            })
+            .catch((error) => {
+                console.error('Image not loaded');
+            })
+
+    </script>
+</body>
+
+</html>

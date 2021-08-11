@@ -1,0 +1,13 @@
+body {
+    background:black;
+}
+
+#frame {
+    width:250px;
+    height:750px;
+    position:fixed;
+    left:50%;
+    top:0;
+    margin-left:calc(-250px/2);
+    background:white;
+}
