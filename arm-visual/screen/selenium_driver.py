@@ -15,7 +15,7 @@ class SeleniumDriver:
         while retry < 3:
             try:
                 # opts = webdriver.FirefoxOptions()  # driver is invisible
-                # opts.headless = False
+                # opts.headless = True
                 self.driver = webdriver.Firefox()  # Open the website
                 self.driver.get("https://8kun.top/random/index.html")
                 # self.driver.navigate().refresh()
