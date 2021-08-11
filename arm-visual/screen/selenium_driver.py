@@ -14,11 +14,10 @@ class SeleniumDriver:
         retry = 0
         while retry < 3:
             try:
-                # opts = webdriver.FirefoxOptions()  # driver is invisible
-                # opts.headless = True
-                self.driver = webdriver.Firefox()  # Open the website
+                opts = webdriver.FirefoxOptions()  # driver is invisible
+                opts.headless = True
+                self.driver = webdriver.Firefox(options=opts)  # Open the website
                 self.driver.get("https://8kun.top/random/index.html")
-                # self.driver.navigate().refresh()
                 self.driver.set_page_load_timeout(
                     30
                 )  # set page timeout, throws error if fails to load page
@@ -84,6 +83,7 @@ class SeleniumDriver:
                 )
             )
             captcha_input = captcha.find_element_by_name("captcha_text")
+
             captcha_input.send_keys("cool")
 
             # submit
