@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Roo Setup Settings</title>
+    <link rel="stylesheet" href="../static/index.css">
+</head>
+
+<body>
+    <div id="container">
+        <h2>Roo Setup</h2>
+        <form id="settings" method="POST" action="{{ url_for('main') }}">
+            <div class="entry">
+                <label for="max_frames">Max Frames</label>
+                <input type="text" name="max_frames" value="{{request.form.max_frames}}" placeholder="{{max_frames}}">
+            </div>
+            <div class=" entry">
+                <label for="min_frames">Min Frames</label>
+                <input type="text" name="min_frames" value="{{request.form.min_frames}}" placeholder="{{min_frames}}">
+            </div>
+            <div class="entry">
+                <label for="min_frames">Embedding Scale</label>
+                <input type="text" name="embedding" value="{{request.form.embed}}" placeholder="{{embed}}">
+            </div>
+            <div class="entry">
+                <div id="error">{{error}}</div>
+            </div>
+            <input type="submit" name="reset" value="Reset">
+            <input type="submit" name="save" value="Save">
+        </form>
+    </div>
+</body>
+
+</html>

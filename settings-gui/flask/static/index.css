@@ -1,0 +1,59 @@
+body {
+    font-family:Helvetica, sans-serif;
+    font-size:1em;
+}
+
+a {
+    color:#777;
+}
+
+#container {
+    margin:0 auto;
+    width:30%;
+    min-width:250px;
+    margin-top:5em;
+}
+
+#settings {
+    padding:1em 1.5em;
+    width:100%;
+    background:#f5f5f5;
+    border:1px solid #ccc;
+}
+
+.entry {
+    margin:1em 0em;
+    font-weight:bold;
+}
+
+input[type="text"] {
+    margin-left:1em;
+    width:4em;
+}
+
+input[type="submit"] {
+    margin:1em auto;
+}
+
+input {
+    font-size:1em;
+    font-family:Helvetica, sans-serif;
+    padding:0.4em 0.7em 0.2em 0.7em;
+}
+
+input[name="save"] {
+    background:blue;
+    border-color:blue;
+    border-radius:0.2em;
+    color:#fff;
+}
+
+input[name="save"]:hover {
+    background:darkblue;
+    border-color:darkblue;
+}
+
+#error {
+    font-weight:normal;
+    color:red;
+}
