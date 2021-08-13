@@ -4,6 +4,8 @@ import selenium_driver
 
 app = Flask(__name__)
 
+driver = selenium_driver.SeleniumDriver()
+
 
 @app.route("/")
 def main():
@@ -12,10 +14,9 @@ def main():
 
 @app.route("/image", methods=["GET"])
 def get_data():
-    driver = selenium_driver.SeleniumDriver()
-    flag = driver.write_to_body("sweet")
+    flag = driver.write_to_body("Hello, world")
     if flag:
-        image_data = driver.get_captcha_image()
+        image_data = driver.get_submit_captcha()
         response = app.response_class(
             response=json.dumps(image_data), mimetype="application/json"
         )

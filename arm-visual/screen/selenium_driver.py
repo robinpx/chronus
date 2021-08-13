@@ -14,9 +14,9 @@ class SeleniumDriver:
         retry = 0
         while retry < 3:
             try:
-                opts = webdriver.FirefoxOptions()  # driver is invisible
-                opts.headless = True
-                self.driver = webdriver.Firefox(options=opts)  # Open the website
+                # opts = webdriver.FirefoxOptions()  # driver is invisible
+                # opts.headless = True
+                self.driver = webdriver.Firefox()  # Open the website
                 self.driver.get("https://8kun.top/random/index.html")
                 self.driver.set_page_load_timeout(
                     30
@@ -55,7 +55,7 @@ class SeleniumDriver:
         except:
             return False
 
-    def get_captcha_image(self):
+    def get_submit_captcha(self):
         try:
             # get captcha objects
             time.sleep(10)
@@ -71,6 +71,7 @@ class SeleniumDriver:
             print(captcha_image)
             image_json = {"image": captcha_image}
             print("Retrieved captcha image")
+            self.submit_captcha()
             return image_json
         except:
             return False
@@ -84,12 +85,14 @@ class SeleniumDriver:
             )
             captcha_input = captcha.find_element_by_name("captcha_text")
 
-            captcha_input.send_keys("cool")
+            write_captcha = input("Enter the captcha: ")
+            captcha_input.send_keys(write_captcha)
 
             # submit
             checkbox = self.driver.find_element_by_name("tos_agree")
             checkbox.click()
             print("Filled captcha")
+            self.submit_post()
             return True
         except:
             return False
@@ -103,21 +106,14 @@ class SeleniumDriver:
                 )
             )
             submit_post = captcha_popup.find_element_by_id("captcha_pop_submit")
-            # submit_post.click()
+            submit_post.click()
             return True
         except:
             return False
 
     def run(self):
-        print(
-            self.write_to_body(
-                """nice a long !234jiadlj#4592031
-        dfajdlk \n jkasdl \rf jas"""
-            )
-        )
-        print(self.get_captcha_image())
-        print(self.submit_captcha())
-        print(self.submit_post())
+        print(self.write_to_body("Hello, world"))
+        print(self.get_submit_captcha())
 
 
 if __name__ == "__main__":

@@ -6,7 +6,6 @@ Run Flask app in ```flask``` folder
 ```python
 python app.py
 ```
-Please note the location of ```dimensions.txt```
-
+Please note the location of ```dimensions.txt```&nbsp;
 Change the relative path of the text file's location in ```oikomancy.py``` and ```app.py``` 
 
