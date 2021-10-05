@@ -7,6 +7,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 
 import time
+import pyautogui
 
 
 class SeleniumDriver:
@@ -16,13 +17,15 @@ class SeleniumDriver:
             try:
                 # opts = webdriver.FirefoxOptions()  # driver is invisible
                 # opts.headless = True
-                self.driver = webdriver.Firefox()  # Open the website
+                self.driver = (
+                    webdriver.Firefox()
+                )  # Open the website, add options=opts and uncomment for invisible browser
                 self.driver.get("https://8kun.top/random/index.html")
                 self.driver.set_page_load_timeout(
                     30
                 )  # set page timeout, throws error if fails to load page
                 self.wait = WebDriverWait(
-                    self.driver, 10
+                    self.driver, 15
                 )  # add 10 sec wait between each retrieval
                 print("Initialized driver")
                 break
@@ -33,9 +36,19 @@ class SeleniumDriver:
         if retry == 3:
             print("Failed to initialize")
 
-    def _parse(self, string):
-        # parse string to be understood by selenium
-        return string
+    def write_to_subject(self, string):
+        try:
+            subject = self.wait.until(
+                expected_conditions.presence_of_element_located(
+                    (By.XPATH, "//input[@name='subject']")
+                )
+            )
+            subject.send_keys(string)
+            print("Wrote to subject")
+            return True
+        except:
+            print("Cannot find subject")
+            return False
 
     def write_to_body(self, string):
         # text area
@@ -44,18 +57,45 @@ class SeleniumDriver:
                 expected_conditions.presence_of_element_located((By.ID, "body"))
             )
             # body = self.driver.find_element_by_id("body")
-            parse_string = self._parse(string)
-            body.send_keys(parse_string)
-            print("Writing to body")
+            body.send_keys(string)
+            print("Wrote to body")
+            return True
+        except:
+            print("Cannot find body")
+            return False
+
+    def add_image(self):
+        try:
+            add_image = self.wait.until(
+                expected_conditions.presence_of_element_located(
+                    (By.XPATH, "//div[@class='dropzone']")
+                )
+            )
+            add_image.click()
+            pyautogui.write("8kun_images")  # go to folder
+            pyautogui.press("return")
+            time.sleep(2)
+            pyautogui.press("return")
+            time.sleep(2)
+            pyautogui.press("return")
+            print("Added image")
+            return True
+        except:
+            print("Cannot add images")
+            return False
+
+    def submit_form(self):
+        try:
             # select submit button
             submit_button = self.driver.find_element_by_xpath("//input[@type='submit']")
             submit_button.click()
-            print("Submitted body")
+            print("Submitted form")
             return True
         except:
+            print("Form not submitted")
             return False
 
-    def get_submit_captcha(self):
+    def get_captcha_image(self):
         try:
             # get captcha objects
             time.sleep(10)
@@ -76,7 +116,7 @@ class SeleniumDriver:
         except:
             return False
 
-    def submit_captcha(self):
+    def fill_captcha(self, string):
         try:
             captcha = self.wait.until(
                 expected_conditions.presence_of_element_located(
@@ -84,20 +124,19 @@ class SeleniumDriver:
                 )
             )
             captcha_input = captcha.find_element_by_name("captcha_text")
-
-            write_captcha = input("Enter the captcha: ")
-            captcha_input.send_keys(write_captcha)
+            captcha_input.send_keys(string)
 
             # submit
             checkbox = self.driver.find_element_by_name("tos_agree")
             checkbox.click()
             print("Filled captcha")
-            self.submit_post()
+            self.submit_captcha()
             return True
         except:
+            print("Did not fill captcha")
             return False
 
-    def submit_post(self):
+    def submit_captcha(self):
         # captcha_popup = self.driver.find_element_by_id("captcha_main_box")
         try:
             captcha_popup = self.wait.until(
@@ -107,13 +146,29 @@ class SeleniumDriver:
             )
             submit_post = captcha_popup.find_element_by_id("captcha_pop_submit")
             submit_post.click()
+            print("Submit form after captcha")
             return True
         except:
+            print("Form not submitted")
             return False
 
     def run(self):
-        print(self.write_to_body("Hello, world"))
-        print(self.get_submit_captcha())
+        print(self.write_to_subject("nice dog"))
+        print(self.write_to_body("so cute:)"))
+        print(self.add_image())
+        has_captcha = self.get_captcha_image()
+        if has_captcha:
+            self.fill_captcha("some string")
+            self.submit_captcha()
+        else:
+            choice = input(
+                "Do you want to submit the post? Press Y and enter if yes: \n"
+            )
+            if choice == "Y":
+                print(self.submit_form())
+            else:
+                print("Quitting")
+        self.driver.quit()  # quit driver
 
 
 if __name__ == "__main__":
