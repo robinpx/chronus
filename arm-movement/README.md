@@ -17,3 +17,8 @@ To run altered code, namely in the main function, please clean up and rebuild th
 catkin_make clean
 catkin_make
 ```
+
+## To do
+* Fasten handle for singing bowl
+* Grip
+* Test rake at sideways angles
