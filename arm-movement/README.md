@@ -31,3 +31,4 @@ X coordinates(cm)： 15.026564	Y coordinates (cm)： 15.112140	Z coordinates (cm
 ```
 
 ![Ros Arm at 45 degrees](https://raw.githubusercontent.com/robinpx/chronus/main/arm-movement/rosarm45.png)
+Note that the red bar is the X axis and the green bar is the Y axis
