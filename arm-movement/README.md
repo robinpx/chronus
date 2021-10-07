@@ -25,10 +25,10 @@ catkin_make
 * Test rake at sideways angles
 
 ## Notes
-Coordinates of the singing bowl in cm, given the arm is drawing the circle at 45 degrees on servo 1
+Coordinates of the singing bowl in cm, given the arm is drawing the circle at 45 degrees on servo 1. Note that the red bar is the X axis and the green bar is the Y axis.
 ```
 X coordinates(cm)： 15.026564	Y coordinates (cm)： 15.112140	Z coordinates (cm)： 9.625512
 ```
 
 ![Ros Arm at 45 degrees](https://raw.githubusercontent.com/robinpx/chronus/main/arm-movement/rosarm45.png)
-Note that the red bar is the X axis and the green bar is the Y axis
+
