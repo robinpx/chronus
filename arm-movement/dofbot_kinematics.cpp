@@ -280,14 +280,18 @@ int main(int argc, char **argv)
     ros::Rate rate(100);
     spinner.start();
 
-    const string my_file = "src/dofbot_moveit/src/demo.txt";
+    const string circle_file = "src/dofbot_moveit/src/circlepath.txt";
+    const string rakeline_file = "src/dofbot_moveit/src/rakelinepath.txt";
 
     // Instantiate DofbotKinematics
     DofbotKinematics dofkin = DofbotKinematics();
-    dofkin.get_current_joint_pose();
 
+    // Reset pose
+    dofkin.get_current_joint_pose();
     vector<double> reset{45, 90, 90, 90, 90};
-    write_angles(my_file, reset);
+
+    write_angles(circle_file, reset);
+
     dofkin.execute_joint_pose(reset);
 
     // Draw circle
@@ -298,7 +302,9 @@ int main(int argc, char **argv)
     xyz[2] += 2;
     vector<double> rpy = dofkin.get_roll_pitch_yaw(fk_result);
     vector<double> move_up = dofkin.get_ik(xyz, rpy);
-    write_angles(my_file, move_up);
+
+    write_angles(circle_file, move_up);
+
     dofkin.execute_joint_pose(move_up);
 
     double radius = 4.8;
@@ -317,11 +323,44 @@ int main(int argc, char **argv)
         xyz[1] = y;
         vector<double> rpy = dofkin.get_roll_pitch_yaw(fk_result);
         vector<double> move_circle = dofkin.get_ik(xyz, rpy);
-        write_angles(my_file, move_circle);
+
+        write_angles(circle_file, move_circle);
+
         dofkin.execute_joint_pose(move_circle);
     }
 
-    // rake pattern
+    // Rake pattern - line
+
+    // Reset
+    vector<double> rakereset{0, 90, 90, 90, 90};
+
+    write_angles(rakeline_file, rakereset);
+
+    dofkin.execute_joint_pose(rakereset);
+
+    // Beginning position rake
+    vector<double> rakestart{0, 90, 10, 35, 90, 170};
+
+    write_angles(rakeline_file, rakestart);
+
+    dofkin.execute_joint_pose(rakestart);
+
+    // Move forward
+    vector<double> fk_result = dofkin.get_fk(rakestart);
+    vector<double> xyz = dofkin.get_xyz(fk_result);
+    xyz[0] += 4;
+    vector<double> rpy = dofkin.get_roll_pitch_yaw(fk_result);
+    vector<double> move_forward = dofkin.get_ik(xyz, rpy);
+
+    write_angles(rakeline_file, move_forward);
+
+    dofkin.execute_joint_pose(move_forward);
+
+    // Return to original position
+
+    write_angles(rakeline_file, rakestart);
+
+    dofkin.execute_joint_pose(rakestart);
 
     cout << "Finished execution" << endl;
     return 0;
