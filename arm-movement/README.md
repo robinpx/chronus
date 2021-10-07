@@ -28,3 +28,5 @@ Coordinates of the singing bowl in cm, given the arm is drawing the circle at 45
 ```
 X coordinates(cm)： 15.026564	Y coordinates (cm)： 15.112140	Z coordinates (cm)： 9.625512
 ```
+
+![Ros Arm at 45 degrees](https://raw.githubusercontent.com/robinpx/chronus/main/arm-movement/rosarm45.png)
