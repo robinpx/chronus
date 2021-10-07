@@ -22,3 +22,9 @@ catkin_make
 * Fasten handle for singing bowl
 * Grip
 * Test rake at sideways angles
+
+## Notes
+Coordinates of the singing bowl in cm, given the arm is drawing the circle at 45 degrees on servo 1
+```
+X coordinates(cm)： 15.026564	Y coordinates (cm)： 15.112140	Z coordinates (cm)： 9.625512
+```
