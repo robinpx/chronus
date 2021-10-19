@@ -3,6 +3,17 @@ from werkzeug.utils import redirect
 
 app = Flask(__name__)
 
+def get_settings_dict():
+    with open("dimensions.txt", "r") as text_file:
+        # reading current values from file
+        content = text_file.read()
+        setting_lines = content.strip().split("\n")
+        settings=dict()
+        for line in setting_lines:
+            k,v=line.split(",")
+            settings[k]=v
+    return settings
+
 # Success
 @app.route("/success")
 def success():
@@ -15,50 +26,65 @@ def main():
     err = ""
     if request.method == "POST":
         if "save" in request.form.keys():
-            new_settings = ""
+            new_settings = dict()
             ind = 0
+            flag = True
+            old_settings=get_settings_dict()
+            # checking for values entered in text boxes
             for entry in request.form.items():
-                if ind < 3:
-                    if entry[1].replace(".", "", 1).isdigit():
-                        if entry[1][0] == ".":
-                            write_in = "0" + entry[1]
-                        elif len(entry[1]) > 0:
-                            write_in = entry[1]
-                        # build text
-                        if ind == 2:
-                            new_settings += write_in
-                        else:
-                            new_settings += write_in + "\n"
-                        ind += 1
-                        flag = True
-                    else:
-                        flag = False
-                        break
-            if flag:
-                text_file = open("dimensions.txt", "w")
-                text_file.writelines(new_settings)
-                text_file.close()
+                k,v=entry[0],entry[1]
+                if k != "save":
+                    # print(k,v)
+                    if len(v) > 0:
+                        if k != "re_embed" and v.replace(".", "", 1).isdigit():
+                            if v[0] == ".":
+                                v = "0" + v # write as appropriate decimal
+                        # place in dict
+                        new_settings[k]=v
+                ind+=1
+
+            # checking for re_embed values (not detected in request.form.items())
+            v=request.form.getlist("re_embed")
+            if len(v) == 0: # not valid entry for re_embed
+                v.append("off")
+                new_settings["re_embed"]=v[0]
+        
+            if len(new_settings.keys()) > 0:
+                old_settings=get_settings_dict()
+                for k,v in new_settings.items():
+                    old_settings[k]=v
+                with open("dimensions.txt","w") as text_file:
+                    for k,v in old_settings.items():
+                        text_file.write(k+","+v+"\n")
                 print("Changes successful.")
                 return redirect(url_for("success"))
             else:
-                err = "No changes made. Decimals and numbers only."
+                err = "Decimals and numbers only."
                 print(err)
+        
         elif "reset" in request.form.keys():
             with open("dimensions.txt", "w") as text_file:
-                text_file.write("80\n30\n1")  # added in default values
-
-    with open("dimensions.txt", "r") as text_file:
-        # reading current values from file
-        content = text_file.read()
-        setting_vals = content.strip().split("\n")
-        if len(setting_vals) > 0:
-            max_fr = setting_vals[0]
-            min_fr = setting_vals[1]
-            emb = setting_vals[2]
-        return render_template(
-            "index.html", max_frames=max_fr, min_frames=min_fr, embed=emb, error=err
-        )
-
+                with open("default.txt", "r") as default:
+                    content=default.read()
+                    text_file.write(content)  # added in default values
+                err = "Reset to default values. Changes not saved."
+                print(err)
+        
+        
+    settings=get_settings_dict()
+    return render_template(
+            "index.html", 
+            room_radius=settings["room_radius"], 
+            sat_threshold=settings["sat_threshold"], 
+            max_frames=settings["max_frames"], 
+            min_frames=settings["min_frames"], 
+            colinear=settings["colinear"], 
+            interval_listen=settings["interval_listen"], 
+            warm_up=settings["warm_up"], 
+            max_words=settings["max_words"], 
+            re_embed=settings["re_embed"],
+            error=err
+    )
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -3,6 +3,7 @@
 <head>
     <title>Roo Setup Settings</title>
     <link rel="stylesheet" href="../static/index.css">
+
 </head>
 
 <body>
@@ -10,16 +11,54 @@
         <h2>Roo Setup</h2>
         <form id="settings" method="POST" action="{{ url_for('main') }}">
             <div class="entry">
-                <label for="max_frames">Max Frames</label>
-                <input type="text" name="max_frames" value="{{request.form.max_frames}}" placeholder="{{max_frames}}">
+                <label for="max_frames">Room Radius</label>
+                <input type="text" name="room_radius" value="{{request.form.room_radius}}" placeholder="{{room_radius}}">
+                <div class="desc">Approximate room radius, to scale the embedding</div>
             </div>
             <div class=" entry">
-                <label for="min_frames">Min Frames</label>
-                <input type="text" name="min_frames" value="{{request.form.min_frames}}" placeholder="{{min_frames}}">
+                <label for="min_frames">SAT Threshold</label>
+                <input type="text" name="sat_threshold" value="{{request.form.sat_threshold}}" placeholder="{{sat_threshold}}">
+                <div class="desc">Roomba satellite threshold</div>
             </div>
+            
             <div class="entry">
-                <label for="min_frames">Embedding Scale</label>
-                <input type="text" name="embedding" value="{{request.form.embed}}" placeholder="{{embed}}">
+                <a id="adv-button">Toggle Advanced Settings</a>
+            </div>
+            <div id="advanced" class="hide">
+                <div class="entry">
+                    <label for="max_frames">Max Frames</label>
+                    <input type="text" name="max_frames" value="{{request.form.max_frames}}" placeholder="{{max_frames}}">
+                    <div class="desc">To decide length trajectory roomba, num frame between a min and a max</div>
+                </div>
+                <div class=" entry">
+                    <label for="min_frames">Min Frames</label>
+                    <input type="text" name="min_frames" value="{{request.form.min_frames}}" placeholder="{{min_frames}}">
+                </div>
+                <div class="entry">
+                    <label for="colinearity">Colinearity Threshold</label>
+                    <input type="text" name="colinear" value="{{request.form.colinear}}" placeholder="{{colinear}}">
+                    <div class="desc">Sensitivity threshold to judge if 3 points are almost aligned</div>
+                </div>
+                <div class="entry">
+                    <label for="interval_listen">Interval Listen</label>
+                    <input type="text" name="interval_listen" value="{{request.form.listen}}" placeholder="{{interval_listen}}">
+                    <div class="desc">When will listen to new message from Roomba</div>
+                </div>
+                <div class="entry">
+                    <label for="warm_up">Warm Up</label>
+                    <input type="text" name="warm_up" value="{{request.form.warm_up}}" placeholder="{{warm_up}}">
+                    <div class="desc">Number of initial frames to warm up roomba, before word reading etc.</div>
+                </div>
+                <div class="entry">
+                    <label for="max_words">Max Words Per Event</label>
+                    <input type="text" name="max_words" value="{{request.form.max_words}}" placeholder="{{max_words}}">
+                    <div class="desc">Maximum number of concept roomba is saying</div>
+                </div>
+                <div class="entry">
+                    <label for="redefine_embed">Redefine Embeddings</label>
+                    <input type="checkbox" name="re_embed" {% if re_embed == "on" %}checked{% endif %}>
+                    <div class="desc">Check if redefine gpt2 embeddings</div>
+                </div>
             </div>
             <div class="entry">
                 <div id="error">{{error}}</div>
@@ -28,6 +67,20 @@
             <input type="submit" name="save" value="Save">
         </form>
     </div>
+
+
+    <script>
+    const adv_button=document.getElementById("adv-button")
+    adv_button.addEventListener("click",function() {
+        const adv=document.getElementById("advanced")
+        if (adv.getAttribute("class") == "hide") {
+            adv.setAttribute("class","show");
+        }
+        else {
+            adv.setAttribute("class","hide");
+        }
+    });
+    </script>
 </body>
 
 </html>
