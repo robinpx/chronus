@@ -59,7 +59,7 @@ def main():
                 print("Changes successful.")
                 return redirect(url_for("success"))
             else:
-                err = "Decimals and numbers only."
+                err = "No changes made. Decimals and numbers only."
                 print(err)
         
         elif "reset" in request.form.keys():
