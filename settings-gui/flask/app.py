@@ -35,8 +35,8 @@ def main():
                 k,v=entry[0],entry[1]
                 if k != "save":
                     # print(k,v)
-                    if len(v) > 0:
-                        if k != "re_embed" and v.replace(".", "", 1).isdigit():
+                    if len(v) > 0 and v.replace(".", "", 1).isdecimal():
+                        if k != "re_embed":
                             if v[0] == ".":
                                 v = "0" + v # write as appropriate decimal
                         # place in dict
@@ -67,8 +67,8 @@ def main():
                 with open("default.txt", "r") as default:
                     content=default.read()
                     text_file.write(content)  # added in default values
-                err = "Reset to default values. Changes not saved."
-                print(err)
+                print("Changes successful.")
+                return redirect(url_for("success"))
         
         
     settings=get_settings_dict()
@@ -83,7 +83,8 @@ def main():
             warm_up=settings["warm_up"], 
             max_words=settings["max_words"], 
             re_embed=settings["re_embed"],
-            error=err
+            error=err,
+            error_len=len(err)
     )
 
 if __name__ == "__main__":

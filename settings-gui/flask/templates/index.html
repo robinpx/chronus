@@ -10,29 +10,30 @@
     <div id="container">
         <h2>Roo Setup</h2>
         <form id="settings" method="POST" action="{{ url_for('main') }}">
-            <div class="entry">
-                <label for="max_frames">Room Radius</label>
-                <input type="text" name="room_radius" value="{{request.form.room_radius}}" placeholder="{{room_radius}}">
-                <div class="desc">Approximate room radius, to scale the embedding</div>
-            </div>
-            <div class=" entry">
-                <label for="min_frames">SAT Threshold</label>
-                <input type="text" name="sat_threshold" value="{{request.form.sat_threshold}}" placeholder="{{sat_threshold}}">
-                <div class="desc">Roomba satellite threshold</div>
-            </div>
-            
-            <div class="entry">
-                <a id="adv-button">Toggle Advanced Settings</a>
+            <div id="basic">
+                <div class="entry">
+                    <label for="max_frames">Room Radius</label>
+                    <input type="text" name="room_radius" value="{{request.form.room_radius}}" placeholder="{{room_radius}}">
+                    <div class="desc">Approximate room radius, to scale the embedding</div>
+                </div>
+                <div class=" entry">
+                    <label for="min_frames">SAT Threshold</label>
+                    <input type="text" name="sat_threshold" value="{{request.form.sat_threshold}}" placeholder="{{sat_threshold}}">
+                    <div class="desc">Roomba satellite threshold</div>
+                </div>
+                <div class="entry">
+                    <a id="adv-button">Toggle Advanced Settings</a>
+                </div>
             </div>
             <div id="advanced" class="hide">
                 <div class="entry">
                     <label for="max_frames">Max Frames</label>
                     <input type="text" name="max_frames" value="{{request.form.max_frames}}" placeholder="{{max_frames}}">
-                    <div class="desc">To decide length trajectory roomba, num frame between a min and a max</div>
                 </div>
                 <div class=" entry">
                     <label for="min_frames">Min Frames</label>
                     <input type="text" name="min_frames" value="{{request.form.min_frames}}" placeholder="{{min_frames}}">
+                    <div class="desc">To decide length trajectory roomba, num frame between a min and a max</div>
                 </div>
                 <div class="entry">
                     <label for="colinearity">Colinearity Threshold</label>
@@ -60,11 +61,15 @@
                     <div class="desc">Check if redefine gpt2 embeddings</div>
                 </div>
             </div>
-            <div class="entry">
-                <div id="error">{{error}}</div>
+            <div id="err" {% if error_len == 0 %}class="hide"{% endif %}>
+                <div class="entry">
+                    <div id="error">{{error}}</div>
+                </div>
             </div>
+            <div id="buttons">
             <input type="submit" name="reset" value="Reset">
             <input type="submit" name="save" value="Save">
+            </div>
         </form>
     </div>
 
