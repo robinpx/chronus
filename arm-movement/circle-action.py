@@ -46,7 +46,7 @@ def run_positions(pos, ms):
 ####### MAIN FUNCTION SEQUENCE ######
 # Grips handle
 def grip_handle():
-    grip_angles = get_angle_list("grip-circle-handle.txt")
+    grip_angles = get_angle_list("./arm_commands/grip-circle-handle.txt")
     for pos in grip_angles:
         print(pos)
         # run_positions_set_grip(pos, 20, 1000)
@@ -58,7 +58,7 @@ def grip_handle():
 # takes in an integer for the amount of times a circle will be drawn
 def draw_circle(times):
     if isinstance(times, int):
-        circle_angles = get_angle_list("draw-circle.txt")
+        circle_angles = get_angle_list("./arm_commands/draw-circle.txt")
         initial = circle_angles[0]
         print(initial)
         run_positions_set_grip(initial, 140, 2000)
@@ -81,7 +81,7 @@ def draw_circle(times):
 
 
 def release_grip():
-    release_angles = get_angle_list("release-circle-handle.txt")
+    release_angles = get_angle_list("./arm_commands/release-circle-handle.txt")
     for pos in release_angles:
         print(pos)
         run_positions(pos, 1000)
