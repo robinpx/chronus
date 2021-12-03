@@ -14,7 +14,7 @@ def ctrl_all_servo(angle, s_time=500):
 
 
 def main():
-    file = open("demo.txt", "r")
+    file = open("./arm_movement/circle.txt", "r")
     angles = file.read()
     angles = angles.split("\n")
     for i in range(len(angles)):
