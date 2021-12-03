@@ -37,7 +37,7 @@ def run_positions_set_grip(pos, grip_angle, ms):
 def run_positions(pos, ms):
     if len(pos) == 6:
         Arm.Arm_serial_servo_write6(
-            pos[0], pos[1], pos[2], pos[3], pos[4], pos[5], 1000
+            pos[0], pos[1], pos[2], pos[3], pos[4], pos[5], ms
         )
     else:
         raise IndexError("Angle position must be of length 6")
