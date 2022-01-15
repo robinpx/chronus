@@ -24,18 +24,25 @@ A simple settings gui for exhibition technicians to edit fields from ```oikomanc
 * HTML/CSS
 * Python 
 
-### Altar-3000
-Refer to the ```altar-3000-py-txt-files``` directory for final implementation.
-Refer to ```arm-movement``` and ```arm-visual``` directories for drafted implementations.  
-The ```arm_commands``` directory contains the final degrees produced by inverse and forward kinematics by ```arm-movement/dofbot_kinematics.cpp```    
-```arm_commands``` directory's ```txt``` files are used in ```rake-action.py ``` and ```circle-action.py```   
-```selenium_driver.py``` is the Firefox web controller to send prophecies to [8kun](https://en.wikipedia.org/wiki/8chan). 
+### ALTAR-3000
+Refer to the ```altar-3000-py-txt-files``` directory for final implementation
+#### ```arm_commands``` directory 
+Utilizes ```arm-movement/dofbot_kinematics.cpp``` to produce ```txt``` files for servo degrees with ```ROS rvis```.  
+Models found in [DOFBOT-Jetson repository](http://www.yahboom.net/study/Dofbot-Jetson_nano).
 * [ROS](https://www.ros.org/)
 * [MoveIt! Framework](https://moveit.ros.org/)
-* Python 
 * C++
+
+#### ```rake-action.py ``` and ```circle-action.py```  
+* Python 
+* [Arm_lib](https://pypi.org/project/Arm_lib/)
+
+#### ```selenium_driver.py``` 
+Firefox web controller to send prophecies to [8kun](https://en.wikipedia.org/wiki/8chan) and to extract data for the [Open Frameworks](https://openframeworks.cc/) visual interaction. 
+* Python
 
 ## Acknowledgements
 * [Understanding DOF and Kinematics](https://blog.robotiq.com/how-to-calculate-a-robots-forward-kinematics-in-5-easy-steps)
 * [QAnon and Conspiracy](https://www.nytimes.com/article/what-is-qanon.html)
+* [Yahboom DOFBOT-Jetson repository](http://www.yahboom.net/study/Dofbot-Jetson_nano)
 * [Chronus Art Center](http://www.chronusartcenter.org/en/)
