@@ -1,5 +1,6 @@
 # chronus
-This repository contains media art project components I worked on over June - December 2021 at Chronus Art Center made on Linux distro (Ubuntu)[https://ubuntu.com/] and (Firefox)[https://www.mozilla.org/en-US/firefox/new/].
+This repository contains media art project components I worked on from June to December 2021.  
+Made on Linux distro [Ubuntu](https://ubuntu.com/) and [Firefox](https://www.mozilla.org/en-US/firefox/new/).
 
 ## About the Projects
 ### Unfamiliar Convenient  
