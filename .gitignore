@@ -1,3 +1,4 @@
 arm-visual/screen/__pycache__
 arm-visual/screen/geckodriver.log
 .DS_Store
+.env

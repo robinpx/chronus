@@ -3,8 +3,8 @@
 from google_images_search import GoogleImagesSearch
 import os
 
-key = "AIzaSyASgyNa9sGu3QaH8VfOEqUfVkYLqYEz15s"
-cx = "532c1abc0215c15c5"
+key = os.getenv("IMAGES_SEARCH_KEY")
+cx = os.getenv("IMAGES_SEARCH_CX")
 
 gis = GoogleImagesSearch(key, cx)
 
