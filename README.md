@@ -4,10 +4,11 @@ Made on Linux distro [Ubuntu](https://ubuntu.com/) and [Firefox](https://www.moz
 
 ## About the Projects
 ### Unfamiliar Convenient  
-![Unfamiliar](https://i.imgur.com/R0CSiM5.jpg)
-[Unfamiliar Convenient](https://vjnks.com/works/unfamiliar-convenient-46) is set to challenge the limits of smart home objects in order to introduce a range of peculiar behaviors. The first inquiry in an envisioned series studies the relationship between a voice assistant and a vacuum cleaner. The project aims to draw a clearer distinction between the two often coupled definitions, the "internet of things" and "the smart home", as a prerequisite to imagine alternatives for dominant servitude-driven relationships with everyday technologies. What if domestic appliances were to be considered a species?
+<img src="https://i.imgur.com/R0CSiM5.jpg" width="50%" />  <br/>
+[Unfamiliar Convenient](https://vjnks.com/works/unfamiliar-convenient-46) is set to challenge the limits of smart home objects in order to introduce a range of peculiar behaviors. The first inquiry in an envisioned series studies the relationship between a voice assistant and a vacuum cleaner. The project aims to draw a clearer distinction between the two often coupled definitions, the "internet of things" and "the smart home", as a prerequisite to imagine alternatives for dominant servitude-driven relationships with everyday technologies. What if domestic appliances were to be considered a species? 
+
 ### Altar-3000
-![ALTAR-3000](https://i.imgur.com/pQiZ6BA.jpg)
+<img src="https://i.imgur.com/pQiZ6BA.jpg" width="50%" /> <br/>
 [ALTAR-3000](https://vjnks.com/works/altar-3000-51) is a long overdue, automated totem of customised belief. Powered by natural language processing, this intelligent home altar performs gimmicky New Age rituals all while generating "prophecies" for headlines retrieved from betting platforms that offer exchanges on near-future political, financial, and other events. The automated sand garden—adorned with paraphernalia that might have meant something once but doesn’t reflect much in the age of multitude of easily digestible truths—disseminates its prophecies on conspiracy forums.
 
 ## Built With
